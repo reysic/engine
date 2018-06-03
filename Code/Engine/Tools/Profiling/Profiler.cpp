@@ -119,7 +119,7 @@ void ProfileFrameMark()
 //-----------------------------------------------------------------------------------------------
 void PopProfileSample()
 {
- 	ASSERT_OR_DIE( g_currentSample != nullptr, "gCurrentSample == nullptr" );
+	ASSERT_OR_DIE( g_currentSample != nullptr, "gCurrentSample == nullptr" );
 	g_currentSample->End();
 	g_currentSample = g_currentSample->parentSample;
 }

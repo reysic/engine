@@ -1,3 +1,6 @@
+#include "Engine/Config/BuildConfig.hpp"
+
+
 #ifdef NETWORKING_SYSTEM
 
 
@@ -5,7 +8,6 @@
 #include "Engine/Networking/Session.hpp"
 #include "Engine/Renderer/Renderer.hpp"
 #include "Engine/Core/StringUtils.hpp"
-#include "Engine/Core/BuildConfig.hpp"
 
 
 // Include from Game, how to avoid?
@@ -533,8 +535,8 @@ Session* NetworkingSystem::GetLocalSession()
 CONSOLE_COMMAND( address )
 {
 	UNUSED( args );
- 	g_allocatedAddress = g_theNetworkingSystem->AllocateAddressesForHost(
- 		g_theNetworkingSystem->GetLocalHostName(), COMMAND_SERVICE, AF_INET, SOCK_STREAM );
+	g_allocatedAddress = g_theNetworkingSystem->AllocateAddressesForHost(
+		g_theNetworkingSystem->GetLocalHostName(), COMMAND_SERVICE, AF_INET, SOCK_STREAM );
 	g_theDeveloperConsole->ConsolePrint( g_theNetworkingSystem->SockAddrToString( g_allocatedAddress->ai_addr ) );
 }
 
@@ -604,7 +606,7 @@ CONSOLE_COMMAND( join )
 	sockaddr_in out_addr;
 	g_mySocket = g_theNetworkingSystem->SocketJoin( ( args.m_argList[ 0 ] ).c_str(), COMMAND_SERVICE, &out_addr );
 
- 	if ( g_mySocket != INVALID_SOCKET )
+	if ( g_mySocket != INVALID_SOCKET )
 	{
 		const char* sockAddr = g_theNetworkingSystem->SockAddrToString( ( const sockaddr* ) &out_addr );
 		std::string sockAddrStr = std::string( sockAddr );
@@ -671,9 +673,9 @@ void OnPingReceived( const Sender& sender, const Message& msg )
 // 
 // 	g_theDeveloperConsole->ConsolePrint( "Received ping from: " + addrStr + ". [" + endStr + "]" );
 // 
- 	Message pong( NETMSG_PONG );
+	Message pong( NETMSG_PONG );
 
- 	g_session->SendMessageDirect( sender.msgSrcAddr, pong );
+	g_session->SendMessageDirect( sender.msgSrcAddr, pong );
 }
 
 
@@ -845,7 +847,7 @@ CONSOLE_COMMAND( net_ping )
 		if ( args.m_argList.size() == 0 )
 		{
 			g_theDeveloperConsole->ConsolePrint( "Must provide an IP address to ping.", Rgba::RED );
- 		}
+		}
 		else if ( args.m_argList.size() == 1 )
 		{
 			std::string colon = ":";
@@ -962,7 +964,7 @@ CONSOLE_COMMAND( net_session_create_connection )
 			( uint16_t ) atoi( secondConnectionPort.c_str() ), &secondConnectionAddr );
 
 		g_session->CreateConnection( 0, "PLAYER0", firstConnectionAddr );
- 		g_session->CreateConnection( 1, "PLAYER1", secondConnectionAddr );
+		g_session->CreateConnection( 1, "PLAYER1", secondConnectionAddr );
 		return;
 	}
 

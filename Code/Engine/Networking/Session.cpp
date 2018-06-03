@@ -1,9 +1,11 @@
+#include "Engine/Config/BuildConfig.hpp"
+
+
 #ifdef NETWORKING_SYSTEM
 
 
 #include "Engine/Networking/Session.hpp"
 #include "Engine/Core/Time.hpp"
-#include "Engine/Core/BuildConfig.hpp"
 
 
 // Include from Game, how to avoid?
